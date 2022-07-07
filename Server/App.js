@@ -5,6 +5,8 @@ const {MONGOURI} = require('./keys');
 const port = 3000;
 require("./models/user");
 
+app.use(express.json());
+app.use("./routes/auth");
 
 mongoose.connect(MONGOURI,{
     UseNewUrlParser:true,
