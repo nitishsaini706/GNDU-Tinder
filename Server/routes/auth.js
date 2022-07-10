@@ -1,42 +1,44 @@
 const router = require('express').Router();
+const User = require('../models/User')
+const bcrypt =require('bcrypt');
+const { route } = require('./user');
 
-// const mongoose = require('mongoose');
-// const user = mongoose.model('User')
-// const bcrypt =require('bcryptjs');
+//create new user/register
+router.post("/register" ,async (req,res)=>{
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const hashedpassword = await  bcrypt.hash(req.body.password,salt);
 
-// router.post('/signup',(req,res)=>{
-//     const {name,email,password} =req.body;
-//     if(!email || !name || !password)
-//     {
-//         req.status(442).json({error:"please add all fields"})
-//     }
-//     user.findOne({email:email}).then((savedUser)=>{
-//         if(savedUder){
-//             return res.status(422).json({error:"user already exist with this email"})
-//         }
-//         bcrypt.hash(password,32)
-//         .then(hashedpassword=>{
-//             const user =  new User({
-//                 email,password:hashedpassword,name
-//             })
-//         })
-        
+        const newUser = new User({
+            name:req.body.name,
+            email:req.body.email,
+            password:hashedpassword,
+        });
 
-//         user.svae()
-//         .then(user => {
-//             res.json({message:"Saved credentials"})
-//         })
-//         .catch(err=>{
-//             console.log(err)
-//         })
-//     })
-//     .catch(err => {
-//         console.log(err);
-//     })
-// })
+        const user = await newUser.save();
+        res.status(200).json(user)
+    }
+    catch(err){
+        console.log(err)
+    }
+});
 
-router.get("/" , (req,res)=>{
-    res.send("Auth homepage");
+// login 
+
+router.post("login",async(req,res)=>{
+    try{
+        const user = await User.findONe({email:req.body.email});
+        !user && res.status(404).json("User not found");
+
+        const validPassword = await bcrypt.compare(req.body.password,user.password)
+        !validPassword && res.status(400).json("wrong password");
+
+        res.status(200).json(user)
+    }
+    catch (err) 
+    {
+        res.status(500).json(err);
+    }
 })
 
 module.exports = router;

@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -38,7 +37,22 @@ const userSchema = new mongoose.Schema({
     isAdmin:{
         type:Boolean,
         default:false,
+    },
+    desc:{
+        type:String,
+        max:50
+    },
+    city:{
+        type:String,
+        max:50
+    },
+    department:{
+        type:String,
+        max:50
     }
-})
+},
+// will create time stamps everytime schema is updated or created
+{timestamps:true}
+)
 
-module.exports = mongoose.model("User",userSchema);
+module.export = mongoose.model("User",userSchema);
