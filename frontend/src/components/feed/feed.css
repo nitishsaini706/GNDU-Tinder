@@ -1,0 +1,12 @@
+.feed{
+    display: flex;
+    justify-content: center;
+    margin-left: 10vw;
+    height: 100%;
+    width: 80%;
+    /* background-color: red; */
+}
+
+.feedWrapper{
+    padding:20px;
+}
