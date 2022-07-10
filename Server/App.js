@@ -8,7 +8,8 @@ const port = 3000;
 // require("./models/user");
 const userRoute = require('./routes/user');
 const authRoute = require('./routes/auth');
-const postRoute = require('./routes/post');
+const postRoute = require('./routes/posts');
+
 dotenv.config();
 
 
