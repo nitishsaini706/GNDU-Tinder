@@ -8,7 +8,7 @@ const port = 3000;
 // require("./models/user");
 const userRoute = require('./routes/user');
 const authRoute = require('./routes/auth');
-
+const postRoute = require('./routes/post');
 dotenv.config();
 
 
@@ -21,6 +21,7 @@ app.use(morgan("common"));
 // routes 
 app.use("/api/users",userRoute);
 app.use("/api/auth",authRoute);
+app.use("/api/posts",postRoute);
 
 mongoose.connect(process.env.mongo_url,{UseNewUrlParser:true,useUnifiedTopology:true} , ()=> {
     console.log("connected to mongo db")
