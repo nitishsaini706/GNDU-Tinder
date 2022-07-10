@@ -4,9 +4,10 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 const app = express();
 const mongoose = require("mongoose");
-// const {MONGOURI} = require('./keys')
 const port = 3000;
 // require("./models/user");
+const userRoute = require('./routes/user');
+const authRoute = require('./routes/auth');
 
 dotenv.config();
 
@@ -17,19 +18,17 @@ app.use(express.json());  // it parses post request for use
 app.use(helmet());
 app.use(morgan("common"));
 
-// app.use("./routes/auth");
+// routes 
+app.use("/api/users",userRoute);
+app.use("/api/auth",authRoute);
 
 mongoose.connect(process.env.mongo_url,{UseNewUrlParser:true,useUnifiedTopology:true} , ()=> {
     console.log("connected to mongo db")
 });
 
-// mongoose.connection.on('connected', ()=> {
-//     console.log(("connected to mongo"));
-// })
-
-// mongoose.connection.on('error',(err)=>{
-//     console.log('err connecting',err);
-// })
+app.get("/",(req,res) =>{
+    res.send("home page");
+})
 
 app.listen(port , ()=>{
     console.log("APP is running on ",port);
