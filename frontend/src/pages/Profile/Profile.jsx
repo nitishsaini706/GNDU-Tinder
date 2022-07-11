@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from '../../components/navbar/Navbar'
+import Feed from ".././components/feed/Feed"
 import "./profile.css"
 
 export default function Profile() {
@@ -23,6 +24,7 @@ export default function Profile() {
                 <div className="profileRightBottom"></div>
             </div>
         </div>
+        <Feed/>
     </>
   )
 }
