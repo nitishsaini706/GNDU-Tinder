@@ -1,4 +1,4 @@
-import './login.css'
+import './register.css'
 import React from 'react'
 
 export default function login() {
@@ -13,11 +13,13 @@ export default function login() {
             </div>
             <div className="loginRight">
                 <div className="loginBox">
+                    <input type="text" className="loginInput" placeholder='username' />
                     <input type="Email" className="loginInput" placeholder='email' />
                     <input type="Password" className="loginInput" placeholder='password'/>
-                    <button className="loginButton">Log In</button>
-                    <button className="loginForgot">Forgot Password?</button>
-                    <button className="loginRegisterButton">Sign Up</button>               
+                    <input type="Password" className="loginInput" placeholder='password again'/>
+                    <button className="loginButton">Create Account</button>
+                    {/* <button className="loginForgot">Forgot Password?</button> */}
+                    <button className="loginRegisterButton">Login</button>               
                  </div>
             </div>
         </div>
