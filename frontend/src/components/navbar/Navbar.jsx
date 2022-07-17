@@ -1,13 +1,17 @@
 import "./navbar.css";
 import {Search,Person, Chat,Notifications} from "@mui/icons-material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import {Link} from "react-router-dom"
 
 export default function Navbar() {
   return (
     <>
       <div className="navbarContainer">
         <div className="navbarLeft">
-          <span className="logo">GNDU <FavoriteBorderIcon className="heart"/>Tinder</span>
+          {/* <Link to="/home" style={{textDecoration:"none"}}> */}
+
+            <span className="logo">GNDU <FavoriteBorderIcon className="heart"/>Tinder</span>
+          {/* </Link> */}
           
         </div>
         <div className="navbarCenter">

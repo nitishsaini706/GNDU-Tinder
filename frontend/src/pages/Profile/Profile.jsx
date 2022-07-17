@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/navbar/Navbar'
-import Feed from ".././components/feed/Feed"
+import Feed from "../../components/feed/Feed"
 import "./profile.css"
+import axios from "axios";
 
 export default function Profile() {
+
+    const [user,setUser] = useState({});
+    useEffect(()=>{
+        const fetchuser = async()=>{
+    
+          const res = await axios.get(`${post.userId}`);
+          setUser(res.data);
+        }
+        fetchuser();
+      },[post.userId])
   return (
     <>
     
@@ -24,7 +35,7 @@ export default function Profile() {
                 <div className="profileRightBottom"></div>
             </div>
         </div>
-        <Feed/>
+        <Feed username="john"/>
     </>
   )
 }

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Post =require("../models/Post")
+const User =require("../models/user")
 
 
 // create a post 
@@ -91,10 +92,10 @@ router.get("/:id",async (req,res)=>{
 })
 
 // get timeline epost 
-router.get("/timeline/all" , async(req,res)=>{
+router.get("/timeline/:userId" , async(req,res)=>{
     try{
         // we find current user 
-        const currentUser = await User.findById(req.body.userId);
+        const currentUser = await User.findById(req.params.userId);
 
         // get all the posts of this user
         const userPosts = await Post.find({userId : currentUser._id});
@@ -109,6 +110,21 @@ router.get("/timeline/all" , async(req,res)=>{
 
         // this will concat all post with current posts in feed
         res.json(userPosts.concat(...friendPosts));
+    }
+    catch(err)
+    {
+        res.status(500).json(err);
+    }
+})
+
+// get user's all posts 
+router.get("/profile/::username" , async(req,res)=>{
+    try{
+        // we find current user 
+        const user = await User.findOne({username:req.params.username})
+        const posts = await Post.find({userid : user._id});
+        res.status(200).json(posts);
+        
     }
     catch(err)
     {

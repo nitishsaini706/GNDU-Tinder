@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 const app = express();
 const mongoose = require("mongoose");
-const port = 3000;
+const port = 8800;
 // require("./models/user");
 const userRoute = require('./routes/user');
 const authRoute = require('./routes/auth');

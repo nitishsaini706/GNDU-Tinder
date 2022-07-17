@@ -3,34 +3,38 @@ import Register from "./pages/register/Register";
 import Login from "./pages/login/login"
 import Profile from "./pages/Profile/Profile"
 import {
-  Router,
-  Switch,
+  BrowserRouter as Router,
   Route,
+  Routes,
+  
 
 } from "react-router-dom";
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Home/>
-        </Route>
+    // <Router>
+    //   <Routes>
+    //     <Route exact path="/">
+    //       <Home/>
+    //     </Route>
 
-        <Route exact path="/login">
-          <Login/>
-        </Route>
+    //     <Route exact path="/login">
+    //       <Login/>
+    //     </Route>
 
-        <Route exact path="/register">
-          <Register/>
-        </Route>
+    //     <Route exact path="/register">
+    //       <Register/>
+    //     </Route>
 
-        <Route exact path="/profile/:username">
-          <Profile/>
-        </Route>
-      </Switch>
+    //     <Route exact path="/profile/:username">
+    //       <Profile/>
+    //     </Route>
+    //   </Routes>
       
-    </Router>
+    // </Router>
+
+    <Home/>
+    
   );
 }
 
