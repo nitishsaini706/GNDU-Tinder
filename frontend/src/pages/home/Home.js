@@ -11,9 +11,9 @@ export default function Home() {
         <div className='homecontainer'>
             {/* <Navbar/>
             
-            <Feed/> */}
+            <Feed/> 
 
-            {/* <Profile/> */}
+            <Profile/> */}
             <Login/>
             {/* <Register/> */}
             

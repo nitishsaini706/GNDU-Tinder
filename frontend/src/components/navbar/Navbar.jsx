@@ -2,16 +2,20 @@ import "./navbar.css";
 import {Search,Person, Chat,Notifications} from "@mui/icons-material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {Link} from "react-router-dom"
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Navbar() {
+  const {user} = useContext(AuthContext);
+  const PF =process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <>
       <div className="navbarContainer">
         <div className="navbarLeft">
-          {/* <Link to="/home" style={{textDecoration:"none"}}> */}
+          <Link to="/home" style={{textDecoration:"none"}}>
 
             <span className="logo">GNDU <FavoriteBorderIcon className="heart"/>Tinder</span>
-          {/* </Link> */}
+          </Link>
           
         </div>
         <div className="navbarCenter">
@@ -39,7 +43,9 @@ export default function Navbar() {
               <span className="navbarIconBadge">3</span>
             </div>
           </div>
-          <img src="/assests/person/1.png" alt="" className="navbarImg"/>
+          <Link to={`/profile/${user.username}`}>
+            <img src={user.profilePicture ? PF+user.profilePicture : PF+"person/noAvatar.png"} alt="" className="navbarImg"/>
+          </Link>
         </div>
       </div>
     </>

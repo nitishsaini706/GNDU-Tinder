@@ -1,14 +1,23 @@
 import "./login.css"
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
+import { loginCall } from "../../apiCalls";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Login() {
 
     const email = useRef();
     const pass = useRef();
+    const {user,isFetching,error,dispatch} = useContext(AuthContext);
     const handleClick = (e)=>{
         e.preventDefault();
-        console.log(email.current.value)
+        loginCall(
+            {
+                email:email.current.value,password:pass.current.value
+            },
+            dispatch
+        );
+        console.log(user)
     };
     return (
     <div className='login'>
@@ -23,7 +32,7 @@ export default function Login() {
                 <form className="loginBox" onClick={handleClick}>
                     <input type="email" className="loginInput" placeholder='email' ref={email} required />
                     <input type="password" className="loginInput" placeholder='password' ref={pass} minLength="6" required/>
-                    <button className="loginButton">Log In</button>
+                    <button className="loginButton" type="submit">{isFetching ? "Loading" : "Log In"}</button>
                     <button className="loginForgot">Forgot Password?</button>
                     <button className="loginRegisterButton">Sign Up</button>               
                 </form>
