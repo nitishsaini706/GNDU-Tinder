@@ -1,26 +1,34 @@
 import './register.css'
-import React from 'react'
+import React, { useRef } from 'react'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-export default function login() {
+export default function Register() {
+
+    const email  = useRef();
+    const password = useRef();
+    const handleClick = (e)=>{
+        e.preventDefault();
+        console.log(email.value)
+    }
   return (
     <div className='login'>
         <div className="loginWrapper">
             <div className="loginLeft">
-                <h1 className="loginLogo">Gndu<span></span>Tinder</h1>
+                <h1 className="loginLogo">Gndu<span><FavoriteBorderIcon className="heart"/>Tinder</span></h1>
                 <span className="loginDesc">
                     Connect with people in university and find your perfect other
                 </span>
             </div>
             <div className="loginRight">
-                <div className="loginBox">
+                <form className="loginBox" onSumbit={handleClick}>
                     <input type="text" className="loginInput" placeholder='username' />
-                    <input type="Email" className="loginInput" placeholder='email' />
-                    <input type="Password" className="loginInput" placeholder='password'/>
+                    <input type="Email" className="loginInput" placeholder='email' ref={email} required minLength="6"/>
+                    <input type="Password" className="loginInput" placeholder='password' ref={password} required/>
                     <input type="Password" className="loginInput" placeholder='password again'/>
                     <button className="loginButton">Create Account</button>
-                    {/* <button className="loginForgot">Forgot Password?</button> */}
+                    <button className="loginForgot">Forgot Password?</button>
                     <button className="loginRegisterButton">Login</button>               
-                 </div>
+                 </form>
             </div>
         </div>
     </div>

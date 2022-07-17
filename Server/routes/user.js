@@ -46,7 +46,7 @@ router.put("/:id" ,async(req,res)=>{
 router.delete("/:id" ,async(req,res)=>{
     if(req.body.userId == req.params.id || req.body.isAdmin)
     {
-        if(req.body.paddword)
+        if(req.body.password)
         {
             try{
                 const salt = await User.findByIdAndDelete(req.params.id);
@@ -67,10 +67,10 @@ router.delete("/:id" ,async(req,res)=>{
 //get user 
 
 router.get("/" , async(req,res)=>{
-    const userid = req.query.userId;
+    const userId = req.query.userId;
     const username = req.query.username;
     try{
-        const user = await User.findById(req.params.id);
+        const user = userId ? await  User.findById(userId) : await User.findOne({username: username});
         const {passwrod,updatedAt,...other}=user._doc
         res.status(200).json(other);
     }
