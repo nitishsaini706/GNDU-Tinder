@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react'
 import './share.css'
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import {Label,Room,EmojiEmotions} from '@mui/icons-material'
+import {Label,Room,EmojiEmotions,Cancel} from '@mui/icons-material'
 import {AuthContext} from "../../context/AuthContext"
 import axios from 'axios';
 
@@ -46,6 +46,12 @@ export default function Share() {
                 <input className="shareInput" placeholder={"what's in your mind bro"+user.username+"?"} ref={desc} />
             </div>
             <hr className='shareHr'/>
+            {file && (
+                <div className="shareImgContainer">
+                    <img className="shareImg" src={URL.createObjectURL(file)} alt="" />
+                    <Cancel className="shareCancelImg" onCLick={()=>setFile(null)} />
+                </div>
+            )}
             <form className="shareBottom" onSubmit={handleSubmit}>
                 <label htmlFor='file' className="shareOptions">
                     <AddAPhotoIcon  className='marginIcons'/>
