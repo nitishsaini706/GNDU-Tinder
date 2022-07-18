@@ -4,11 +4,7 @@ import {
   Chat,
   PlayCircleFilledOutlined,
   Group,
-  Bookmark,
-  HelpOutline,
-  WorkOutline,
-  Event,
-  School,
+  
 } from "@material-ui/icons";
 import { Users } from "../../dummyData";
 import CloseFriend from "../closeFriend/CloseFriend";
