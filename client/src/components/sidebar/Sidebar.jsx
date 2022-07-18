@@ -1,10 +1,6 @@
 import "./sidebar.css";
-import {
-  RssFeed,
-  Chat,
-  PlayCircleFilledOutlined,
-  Group,
-} from "@material-ui/icons";
+import { RssFeed,Chat,PlayCircleFilledOutlined,
+  Group,} from "@material-ui/icons";
 import { Users } from "../../dummyData";
 import CloseFriend from "../closeFriend/CloseFriend";
 
