@@ -1,43 +1,68 @@
-import "./login.css"
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import React, { useContext, useRef } from "react";
+import { useContext, useRef } from "react";
+import "./login.css";
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+
 import { loginCall } from "../../apiCalls";
 import { AuthContext } from "../../context/AuthContext";
+import { CircularProgress } from "@material-ui/core";
 
 export default function Login() {
+  const email = useRef();
+  const password = useRef();
+  const { isFetching, dispatch } = useContext(AuthContext);
 
-    const email = useRef();
-    const pass = useRef();
-    const {user,isFetching,error,dispatch} = useContext(AuthContext);
-    const handleClick = (e)=>{
-        e.preventDefault();
-        loginCall(
-            {
-                email:email.current.value,password:pass.current.value
-            },
-            dispatch
-        );
-        console.log(user)
-    };
-    return (
-    <div className='login'>
-        <div className="loginWrapper">
-            <div className="loginLeft">
-                <h1 className="loginLogo">Gndu<span><FavoriteBorderIcon className="heart"/>Tinder</span></h1>
-                <span className="loginDesc">
-                    Connect with people in university and find your perfect other
-                </span>
-            </div>
-            <div className="loginRight">
-                <form className="loginBox" onClick={handleClick}>
-                    <input type="email" className="loginInput" placeholder='email' ref={email} required />
-                    <input type="password" className="loginInput" placeholder='password' ref={pass} minLength="6" required/>
-                    <button className="loginButton" type="submit">{isFetching ? "Loading" : "Log In"}</button>
-                    <button className="loginForgot">Forgot Password?</button>
-                    <button className="loginRegisterButton">Sign Up</button>               
-                </form>
-            </div>
+  const handleClick = (e) => {
+    e.preventDefault();
+    loginCall(
+      { email: email.current.value, password: password.current.value },
+      dispatch
+    );
+  };
+
+  return (
+    <div className="login">
+      <div className="loginWrapper">
+        <div className="loginLeft">
+          <h3 className="loginLogo">GNDU <FavoriteBorderIcon className="heart"/>Tinder</h3>
+          <span className="loginDesc">
+            Connect with friends and the world around you on Lamasocial.
+          </span>
         </div>
+        <div className="loginRight">
+          <form className="loginBox" onSubmit={handleClick}>
+            <input
+              placeholder="Email"
+              type="email"
+              required
+              className="loginInput"
+              ref={email}
+            />
+            <input
+              placeholder="Password"
+              type="password"
+              required
+              minLength="6"
+              className="loginInput"
+              ref={password}
+            />
+            <button className="loginButton" type="submit" disabled={isFetching}>
+              {isFetching ? (
+                <CircularProgress color="white" size="20px" />
+              ) : (
+                "Log In"
+              )}
+            </button>
+            <span className="loginForgot">Forgot Password?</span>
+            <button className="loginRegisterButton">
+              {isFetching ? (
+                <CircularProgress color="white" size="20px" />
+              ) : (
+                "Create a New Account"
+              )}
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
